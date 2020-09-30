@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "toppings",
+  "info": {
+    "name": "Toppings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "vegetarian": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "pizzas": {
+      "collection": "pizzas",
+      "via": "toppings"
+    }
+  }
+}

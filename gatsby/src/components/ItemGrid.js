@@ -12,10 +12,12 @@ export default function ItemGrid({ items }) {
           <img
             width="500"
             height="400"
-            src={`${item.image.asset.url}?w=500&h=400&fit=crop`}
+            src={`${process.env.GATSBY_STRAPI_UPLOADS_ENDPOINT}${item.image.url}`}
             alt={item.name}
             style={{
-              background: `url(${item.image.asset.metadata.lqip})`,
+              width: 225,
+              height: 180,
+              objectFit: 'cover',
               backgroundSize: 'cover,',
             }}
           />
@@ -24,3 +26,4 @@ export default function ItemGrid({ items }) {
     </ItemsGrid>
   )
 }
+

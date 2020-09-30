@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/slicemasters",
+      "handler": "slicemasters.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/slicemasters/count",
+      "handler": "slicemasters.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/slicemasters/:id",
+      "handler": "slicemasters.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/slicemasters",
+      "handler": "slicemasters.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/slicemasters/:id",
+      "handler": "slicemasters.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/slicemasters/:id",
+      "handler": "slicemasters.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

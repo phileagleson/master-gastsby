@@ -20,26 +20,23 @@ export default function PizzasPage({ data, pageContext }) {
     </>
   )
 }
-
-export const query = graphql`
+export const strapiQuery = graphql`
   query PizzaQuery($topping: [String]) {
-    pizzas: allSanityPizza(
+    pizzas: allStrapiPizzas(
       filter: { toppings: { elemMatch: { name: { in: $topping } } } }
     ) {
       nodes {
         name
         id
-        slug {
-          current
-        }
+        slug
         toppings {
           id
           name
         }
         image {
-          asset {
+          childImageSharp {
             fluid(maxWidth: 400) {
-              ...GatsbySanityImageFluid
+              ...GatsbyImageSharpFluid
             }
           }
         }

@@ -55,7 +55,7 @@ export default function ToppingsFilter({ activeTopping }) {
   // get a list of all pizzas with their topping
   const { pizzas } = useStaticQuery(graphql`
     query {
-      pizzas: allSanityPizza {
+      pizzas: allStrapiPizzas {
         nodes {
           toppings {
             name

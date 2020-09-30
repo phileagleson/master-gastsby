@@ -55,12 +55,12 @@ export default function SlicemastersPage({ data, pageContext }) {
       <SlicemasterGridStyles>
         {slicemasters.map((person) => (
           <SlicemasterStyles key={person.id}>
-            <Link to={`/slicemaster/${person.slug.current}`}>
+            <Link to={`/slicemaster/${person.slug}`}>
               <h2>
                 <span className="mark">{person.name}</span>
               </h2>
             </Link>
-            <Img fluid={person.image.asset.fluid} />
+            <Img fluid={person.image.childImageSharp.fluid} />
             <p className="description">{person.description}</p>
           </SlicemasterStyles>
         ))}
@@ -69,21 +69,19 @@ export default function SlicemastersPage({ data, pageContext }) {
   )
 }
 
-export const query = graphql`
+export const strapiQuery = graphql`
   query($skip: Int = 0, $pageSize: Int = 2) {
-    slicemasters: allSanityPerson(limit: $pageSize, skip: $skip) {
+    slicemasters: allStrapiSlicemasters(limit: $pageSize, skip: $skip) {
       totalCount
       nodes {
         name
         id
-        slug {
-          current
-        }
+        slug
         description
         image {
-          asset {
+          childImageSharp {
             fluid(maxWidth: 410) {
-              ...GatsbySanityImageFluid
+              ...GatsbyImageSharpFluid
             }
           }
         }

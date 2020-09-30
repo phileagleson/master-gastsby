@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "store_settings",
+  "info": {
+    "name": "StoreSettings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "slicemasters": {
+      "collection": "slicemasters"
+    },
+    "pizzas": {
+      "collection": "pizzas"
+    },
+    "name": {
+      "type": "uid"
+    }
+  }
+}

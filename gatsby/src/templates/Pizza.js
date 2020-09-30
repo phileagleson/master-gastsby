@@ -13,9 +13,12 @@ const PizzaGridStyles = styled.div`
 export default function SinglePizzaPage({ data: { pizza } }) {
   return (
     <>
-      <SEO image={pizza.image?.asset?.fluid?.src} title={pizza.name} />
+      <SEO
+        image={pizza.image?.childImageSharp?.fluid?.src}
+        title={pizza.name}
+      />
       <PizzaGridStyles>
-        <Img fluid={pizza.image.asset.fluid} />
+        <Img fluid={pizza.image.childImageSharp.fluid} />
         <div>
           <h2 className="mark">{pizza.name}</h2>
           <ul>
@@ -30,15 +33,15 @@ export default function SinglePizzaPage({ data: { pizza } }) {
 }
 
 // need dynamic pizza based on slug
-export const query = graphql`
+export const strapiQuery = graphql`
   query($slug: String!) {
-    pizza: sanityPizza(slug: { current: { eq: $slug } }) {
+    pizza: strapiPizzas(slug: { eq: $slug }) {
       name
       id
       image {
-        asset {
+        childImageSharp {
           fluid(maxWidth: 800) {
-            ...GatsbySanityImageFluid
+            ...GatsbyImageSharpFluid
           }
         }
       }

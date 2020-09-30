@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pizzas",
+  "info": {
+    "name": "Pizzas"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "description": "The name of the Pizza"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "unique": true,
+      "targetField": "name"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "price": {
+      "type": "integer",
+      "required": true,
+      "max": 50000,
+      "min": 1000
+    },
+    "toppings": {
+      "via": "pizzas",
+      "collection": "toppings",
+      "dominant": true
+    }
+  }
+}

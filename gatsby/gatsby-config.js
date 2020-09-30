@@ -11,13 +11,14 @@ export default {
   plugins: [
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: 'gatsby-source-sanity',
+      resolve: 'gatsby-source-strapi',
       options: {
-        projectId: 'agooag6r',
-        dataset: 'production',
-        watchMode: true,
-        token: `${process.env.SANITY_TOKEN}`,
+        apiURL: 'http://localhost:1337',
+        contentTypes: ['pizzas', 'slicemasters', 'toppings'],
+        queryLimit: 1000,
       },
     },
   ],

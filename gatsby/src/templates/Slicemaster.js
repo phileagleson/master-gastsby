@@ -3,31 +3,35 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import SEO from '../components/SEO'
 
-export default function SlicemasterPage({ data: { person } }) {
+export default function SlicemasterPage({ data: { slicemaster } }) {
+  console.log(slicemaster)
   return (
     <>
-      <SEO title={person.name} image={person.image?.asset?.src} />
+      <SEO
+        title={slicemaster.name}
+        image={slicemaster.image?.childImageSharp?.src}
+      />
       <div className="center">
-        <Img fluid={person.image.asset.fluid} />
+        <Img fluid={slicemaster.image.childImageSharp.fluid} />
         <h2>
-          <span className="mark">{person.name}</span>
+          <span className="mark">{slicemaster.name}</span>
         </h2>
-        <p>{person.description}</p>
+        <p>{slicemaster.description}</p>
       </div>
     </>
   )
 }
 
-export const query = graphql`
+export const strapiQuery = graphql`
   query($slug: String!) {
-    person: sanityPerson(slug: { current: { eq: $slug } }) {
+    slicemaster: strapiSlicemasters(slug: { eq: $slug }) {
       name
       id
       description
       image {
-        asset {
+        childImageSharp {
           fluid(maxWidth: 1000, maxHeight: 750) {
-            ...GatsbySanityImageFluid
+            ...GatsbyImageSharpFluid
           }
         }
       }

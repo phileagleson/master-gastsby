@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/store-settings",
+      "handler": "store-settings.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/store-settings",
+      "handler": "store-settings.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/store-settings",
+      "handler": "store-settings.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

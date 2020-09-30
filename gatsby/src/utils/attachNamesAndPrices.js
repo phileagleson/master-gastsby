@@ -7,7 +7,7 @@ export default function attachNamesAndPrices(order, pizzas) {
     return {
       ...item,
       name: pizza.name,
-      thumbnail: pizza.image.asset.fluid.src,
+      thumbnail: pizza.image.childImageSharp.fluid.src,
       price: formatMoney(calculatePizzaPrice(pizza.price, item.size)),
     }
   })

@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react'
 const gql = String.raw
 const deets = gql`
-    name
-    _id
-    image {
-      asset {
-        url
-        metadata {
-          lqip
-        }
-      }
-    }
+  name
+  _id
+  image {
+    url
+  }
 `
 
 export default function useLatestData() {
@@ -21,7 +16,7 @@ export default function useLatestData() {
   // Use a side effect to fetch the data from the graphql endpoing
   useEffect(function () {
     // when the component loads
-    fetch(process.env.GATSBY_GRAPHQL_ENDPOINT, {
+    fetch(process.env.GATSBY_STRAPI_GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,13 +24,13 @@ export default function useLatestData() {
       body: JSON.stringify({
         query: gql`
           query {
-            StoreSettings(id: "downtown") {
+            storeSetting {
               name
               slicemasters {
-               ${deets} 
+                ${deets}
               }
-              hotSlices {
-               ${deets} 
+              pizzas {
+                ${deets}
               }
             }
           }
@@ -45,10 +40,10 @@ export default function useLatestData() {
       res
         .json()
         .then((res) => {
-          // TODO: check for errors
+          console.log(res)
           // set the data to state
-          setHotSlices(res.data.StoreSettings.hotSlices)
-          setSlicemasters(res.data.StoreSettings.slicemasters)
+          setHotSlices(res.data.storeSetting.pizzas)
+          setSlicemasters(res.data.storeSetting.slicemasters)
         })
         .catch((err) => {
           console.log(err)

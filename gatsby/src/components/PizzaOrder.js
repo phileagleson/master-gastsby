@@ -12,7 +12,7 @@ export default function PizzaOrder({ order, pizzas, removeFromOrder }) {
         const pizza = pizzas.find((pizza) => pizza.id === singleOrder.id)
         return (
           <MenuItemStyles key={`singleOrder.id-${index}`}>
-            <Img fluid={pizza.image.asset.fluid} />
+            <Img fluid={pizza.image.childImageSharp.fluid} />
             <h2>{pizza.name}</h2>
             <p>
               {formatMoney(calculatePizzaPrice(pizza.price, singleOrder.size))}

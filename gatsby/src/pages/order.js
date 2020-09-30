@@ -69,7 +69,7 @@ export default function OrderPage({ data }) {
           {pizzas.map((pizza) => (
             <MenuItemStyles key={pizza.id}>
               <Img
-                fluid={pizza.image?.asset?.fluid}
+                fluid={pizza.image?.childImageSharp?.fluid}
                 width="50"
                 height="50"
                 alt={pizza.name}
@@ -118,20 +118,18 @@ export default function OrderPage({ data }) {
   )
 }
 
-export const query = graphql`
+export const strapiQuery = graphql`
   query OrderPizzaQuery {
-    pizzas: allSanityPizza {
+    pizzas: allStrapiPizzas {
       nodes {
         name
         id
-        slug {
-          current
-        }
+        slug
         price
         image {
-          asset {
+          childImageSharp {
             fluid(maxWidth: 100) {
-              ...GatsbySanityImageFluid
+              ...GatsbyImageSharpFluid
             }
           }
         }

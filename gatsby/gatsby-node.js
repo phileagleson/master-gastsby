@@ -7,24 +7,23 @@ async function turnPizzasIntoPages({ graphql, actions }) {
   // 2. Query all pizzas
   const { data } = await graphql(`
     query {
-      pizzas: allSanityPizza {
+      pizzas: allStrapiPizzas {
         nodes {
           name
-          slug {
-            current
-          }
+          slug
         }
       }
     }
   `)
+
   // 3. Loop over each pizza and create a page for that pizza
   data.pizzas.nodes.forEach((pizza) => {
     actions.createPage({
       // What is the url for this new page
-      path: `pizza/${pizza.slug.current}`,
+      path: `pizza/${pizza.slug}`,
       component: pizzaTemplate,
       context: {
-        slug: pizza.slug.current,
+        slug: pizza.slug,
       },
     })
   })
@@ -34,9 +33,10 @@ async function turnToppingsIntoPages({ actions, graphql }) {
   // 1. Get the template
   const toppingTemplate = path.resolve('./src/pages/pizzas.js')
   // 2. query all the toppings
+
   const { data } = await graphql(`
     query {
-      toppings: allSanityTopping {
+      toppings: allStrapiToppings {
         nodes {
           name
           id
@@ -91,14 +91,12 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
   // 1. Query all slicemasters
   const { data } = await graphql(`
     query {
-      slicemasters: allSanityPerson {
+      slicemasters: allStrapiSlicemasters {
         totalCount
         nodes {
           name
           id
-          slug {
-            current
-          }
+          slug
         }
       }
     }
@@ -107,10 +105,10 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
   data.slicemasters.nodes.forEach((slicemaster) => {
     actions.createPage({
       component: path.resolve('./src/templates/Slicemaster.js'),
-      path: `/slicemaster/${slicemaster.slug.current}`,
+      path: `/slicemaster/${slicemaster.slug}`,
       context: {
-        name: slicemaster.person,
-        slug: slicemaster.slug.current,
+        name: slicemaster.name,
+        slug: slicemaster.slug,
       },
     })
   })
